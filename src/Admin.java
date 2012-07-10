@@ -1,12 +1,10 @@
-import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
-
 import java.util.ArrayList;
 
 public class Admin {
-    ArrayList<User> users = new ArrayList<User>();  // Track all the users.
-    ArrayList<User> loggedInUsers = new ArrayList<User>();  // Track logged in users.
-    private boolean foundUser;  // Flag to check if user was found in the above array lists.
-    private final String NO_USER_CREATED = "No users created yet!";  //Constant - Value never changes.
+    ArrayList<User> users = new ArrayList<User>();
+    ArrayList<User> loggedInUsers = new ArrayList<User>();
+    private boolean foundUser;
+    private final String NO_USER_CREATED = "No users created yet!";
     private final String NO_USER_LOGGED_IN = "No user is logged in at this moment!";
 
     public void doMenu() {

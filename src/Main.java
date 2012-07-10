@@ -2,8 +2,8 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static Scanner scanner = new Scanner(System.in); // Static because being used in main which is static method.
-    private static final String FULL_NAME = "Full name: "; // Constants.
+    private static Scanner scanner = new Scanner(System.in);
+    private static final String FULL_NAME = "Full name: ";
     private static final String USERNAME = "User name: ";
     private static final String PASSWORD = "Password: ";
     private static final String OLD_PASSWORD = "Old password: ";
