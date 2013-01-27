@@ -1,24 +1,11 @@
 import java.util.ArrayList;
 
 public class Admin {
-    ArrayList<User> users = new ArrayList<User>();
-    ArrayList<User> loggedInUsers = new ArrayList<User>();
+    public static ArrayList<User> users = new ArrayList<User>();
+    public static ArrayList<User> loggedInUsers = new ArrayList<User>();
     private boolean foundUser;
     private final String NO_USER_CREATED = "No users created yet!";
     private final String NO_USER_LOGGED_IN = "No user is logged in at this moment!";
-
-    public void doMenu() {
-        System.out.println("\nMENU");
-        System.out.println("Please enter the corresponding number to choose an option.");
-        System.out.println("List Users: 1");
-        System.out.println("Find User: 2");
-        System.out.println("Create New User: 3");
-        System.out.println("Log In: 4");
-        System.out.println("Get Password : 5");
-        System.out.println("Change Password: 6");
-        System.out.println("Log Out: 7");
-        System.out.println("Quit: 8");
-    }
 
     public void findUser(String userName) {
         if (!checkIfListIsEmpty(users, NO_USER_CREATED)) {

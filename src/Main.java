@@ -1,3 +1,5 @@
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
@@ -8,43 +10,54 @@ public class Main {
     private static final String PASSWORD = "Password: ";
     private static final String OLD_PASSWORD = "Old password: ";
     private static final String NEW_PASSWORD = "New password: ";
+    private static final String THANK_YOU_MESSAGE = "Thanks for using! Please visit us again!";
+    private static final String DEFAULT_MESSAGE = "This option does not exist! Please try again!";
 
     public static void main(String[] args) {
         Admin admin = new Admin();
-        int optionSelected;
+        Menu menu = new Menu();
+        int userChoice;
         while (true) {
-            admin.doMenu();
-            optionSelected = Integer.parseInt(scanner.nextLine());
-            if (optionSelected == 8) {
-                System.out.println("Thanks for using! Please visit us again!");
+            menu.build();
+            userChoice = Integer.parseInt(scanner.nextLine());
+            if (UserChoice.QUIT.value() == userChoice) {
+                printThankYouMessage();
                 break;
             } else {
-                switch (optionSelected) {
-                    case 1:
-                        admin.listUser();
-                        break;
-                    case 2:
-                        admin.findUser(getInformationFromUser(USERNAME));
-                        break;
-                    case 3:
-                        admin.createUser(getInformationFromUser(FULL_NAME), getInformationFromUser(USERNAME), getInformationFromUser(PASSWORD));
-                        break;
-                    case 4:
-                        admin.logIn(getInformationFromUser(USERNAME), getInformationFromUser(PASSWORD));
-                        break;
-                    case 5:
-                        admin.getPassword(getInformationFromUser(USERNAME));
-                        break;
-                    case 6:
-                        admin.changePassword(getInformationFromUser(USERNAME), getInformationFromUser(OLD_PASSWORD), getInformationFromUser(NEW_PASSWORD));
-                        break;
-                    case 7:
-                        admin.logOut(getInformationFromUser(USERNAME));
-                        break;
-                    default:
-                        System.out.println("This option does not exist! Please try again!");
-                }
+                handleUserRequest(admin, userChoice);
             }
+        }
+    }
+
+    private static void printThankYouMessage() {
+        System.out.println(THANK_YOU_MESSAGE);
+    }
+
+    private static void handleUserRequest(Admin admin, int userChoice) {
+        switch (UserChoice.valueOf(choiceMap().get(userChoice))) {
+            case LIST_USERS:
+                admin.listUser();
+                break;
+            case FIND_USERS:
+                admin.findUser(getInformationFromUser(USERNAME));
+                break;
+            case CREATE_USER:
+                admin.createUser(getInformationFromUser(FULL_NAME), getInformationFromUser(USERNAME), getInformationFromUser(PASSWORD));
+                break;
+            case LOGIN:
+                admin.logIn(getInformationFromUser(USERNAME), getInformationFromUser(PASSWORD));
+                break;
+            case GET_PASSWORD:
+                admin.getPassword(getInformationFromUser(USERNAME));
+                break;
+            case CHANGE_PASSWORD:
+                admin.changePassword(getInformationFromUser(USERNAME), getInformationFromUser(OLD_PASSWORD), getInformationFromUser(NEW_PASSWORD));
+                break;
+            case LOGOUT:
+                admin.logOut(getInformationFromUser(USERNAME));
+                break;
+            default:
+                System.out.println(DEFAULT_MESSAGE);
         }
     }
 
@@ -52,5 +65,17 @@ public class Main {
         System.out.println(message);
         String info = scanner.nextLine();
         return info;
+    }
+
+    public static Map<Integer, String> choiceMap() {
+        Map<Integer, String> choiceMap = new HashMap<Integer, String>();
+        choiceMap.put(1, "LIST_USERS");
+        choiceMap.put(2, "FIND_USERS");
+        choiceMap.put(3, "CREATE_USER");
+        choiceMap.put(4, "LOGIN");
+        choiceMap.put(5, "GET_PASSWORD");
+        choiceMap.put(6, "CHANGE_PASSWORD");
+        choiceMap.put(7, "LOGOUT");
+        return choiceMap;
     }
 }
